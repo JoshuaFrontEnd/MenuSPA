@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<title>MenuFixedScrollResponsive</title>
 
 	<style>
@@ -111,10 +112,10 @@
 		<button class="btnToggleMenu">Open/Close</button>
 
 		<nav class="menu">
-			<a class="menu__link" href="#uno">Uno</a>
-			<a class="menu__link" href="#dos">Dos</a>
-			<a class="menu__link" href="#tres">Tres</a>
-			<a class="menu__link" href="#cuatro">Cuatro</a>
+			<a class="menu__link" href="#uno" data-scroll="true">Uno</a>
+			<a class="menu__link" href="#dos" data-scroll="true">Dos</a>
+			<a class="menu__link" href="#tres" data-scroll="true">Tres</a>
+			<a class="menu__link" href="#cuatro" data-scroll="true">Cuatro</a>
 		</nav>
 	</section>
 
@@ -149,14 +150,6 @@
 			}, 700);
 
 		}
-
-		menuLink.on('click', function(e) {
-			e.preventDefault();
-
-			slideUpMenuMovil();
-			animateScroll(this);
-
-		});
 
 		//Crear anclas independientes
 		triggerScroll.on('click', function(e) {
