@@ -76,7 +76,7 @@
 	<section class="navbar">
 
 		<div class="logo">
-			<a class="logo__link" href="#header">LOGO</a>
+			<a class="logo__link" href="#header" data-scroll="true">LOGO</a>
 		</div>
 
 		<nav class="menu">
@@ -101,26 +101,44 @@
 	<script>
 
 		//Animar scroll
-		var menu = $('.menu');
-		var menuLink = menu.find('a[href^="#"]');
+		var menu = $('.menu'),
+				menuLink = menu.find('a[href^="#"]'),
+				triggerScroll = $('[data-scroll="true"]');
 
-		menuLink.on('click', function(e) {
-	  	e.preventDefault();
+		function animateAnchor ($this) {
 
-			var target = this.hash,
+			var target = $this.hash,
 	        menu = target;
 
 	    $target = $(target);
 
 	    $('html, body').stop().animate({
 	      'scrollTop': $target.offset().top
-	    }, 1000);
+	    }, 700);
+
+		}
+
+		menuLink.on('click', function(e) {
+	  	e.preventDefault();
+
+	  	animateAnchor(this);
 
 		});
+
+		//Crear anclas independientes
+		triggerScroll.on('click', function(e) {
+	  	e.preventDefault();
+
+	  	animateAnchor(this);
+
+		});
+
+
+
 		//Ocultar menu en movil y mostrarlo con boton hamburgesa
 		//Crear animacion del boton hamburgesa al abrir y cerrar menu
 		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
-		//Crear anclas independientes
+
 		//Cambiar clase activa del menu al hacer click y scroll
 		//Detectar cuando el scroll se encuentra en alguna seccion para generar una animacion
 
