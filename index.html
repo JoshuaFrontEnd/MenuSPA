@@ -146,18 +146,16 @@
 		menuLink.on('click', function(e) {
 			e.preventDefault();
 
-
-			// if(doneResizing() <= 752 ){
-   //      menu.slideToggle();
-   //    }
-
-
+			slideUpMenuMovil();
 			animateScroll(this);
+
 		});
 
 		//Crear anclas independientes
 		triggerScroll.on('click', function(e) {
 			e.preventDefault();
+
+			slideUpMenuMovil();
 			animateScroll(this);
 		});
 
@@ -187,6 +185,15 @@
     }
 
     //En movil cerrar menu al hacer click en algun enlace
+    function slideUpMenuMovil () {
+			if(doneResizing() <= 752 ){
+        menu.slideUp();
+      }
+    }
+
+
+
+
 
 
 
