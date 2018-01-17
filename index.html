@@ -119,9 +119,10 @@
 	<script>
 
 		//Animar scroll
-		var menu = $('.menu'),
-		menuLink = menu.find('a[href^="#"]'),
-		triggerScroll = $('[data-scroll="true"]');
+		var $window = $(window),
+				menu = $('.menu'),
+				menuLink = menu.find('a[href^="#"]'),
+				triggerScroll = $('[data-scroll="true"]');
 
 		function animateScroll ($this) {
 
@@ -138,17 +139,13 @@
 
 		menuLink.on('click', function(e) {
 			e.preventDefault();
-
 			animateScroll(this);
-
 		});
 
 		//Crear anclas independientes
 		triggerScroll.on('click', function(e) {
 			e.preventDefault();
-
 			animateScroll(this);
-
 		});
 
 		//Ocultar menu en movil y mostrarlo con boton hamburgesa
@@ -157,6 +154,24 @@
 			menu.slideToggle();
 		});
 
+		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
+		var resizeId;
+    $window.resize(function() {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(doneResizing, 300);
+    });
+
+    function doneResizing(){
+
+        var anchoVentana = $window.outerWidth();
+
+        if(anchoVentana >= 752 ){
+          menu.css('display', '');
+        }
+
+        return anchoVentana;
+
+    }
 
 
 
@@ -165,7 +180,6 @@
 
 
 		//Crear animacion del boton hamburgesa al abrir y cerrar menu
-		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
 
 		//Cambiar clase activa del menu al hacer click y scroll
 		//Detectar cuando el scroll se encuentra en alguna seccion para generar una animacion
