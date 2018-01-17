@@ -32,6 +32,7 @@
 		position: fixed;
 		top: 0;
 		overflow: hidden;
+		border-bottom: 1px solid red;
 	}
 
 	.btnToggleMenu{
@@ -53,11 +54,16 @@
 		border-bottom: 1px solid red;
 	}
 
+	.logo__link{
+		width: auto;
+		border-bottom: none;
+	}
+
 	@media (min-width: 768px) {
 
 		.navbar{
 			position: static;
-
+			border-bottom: none;
 			max-width: 1440px;
 			margin: auto;
 		}
@@ -95,7 +101,7 @@
 			<a class="logo__link" href="#header" data-scroll="true">LOGO</a>
 		</div>
 
-		<button class="btnToggleMenu">Close</button>
+		<button class="btnToggleMenu">Open/Close</button>
 
 		<nav class="menu">
 			<a class="menu__link" href="#uno">Uno</a>
@@ -139,6 +145,13 @@
 
 		menuLink.on('click', function(e) {
 			e.preventDefault();
+
+
+			// if(doneResizing() <= 752 ){
+   //      menu.slideToggle();
+   //    }
+
+
 			animateScroll(this);
 		});
 
@@ -173,6 +186,8 @@
 
     }
 
+    //En movil cerrar menu al hacer click en algun enlace
+
 
 
 
@@ -180,7 +195,6 @@
 
 
 		//Crear animacion del boton hamburgesa al abrir y cerrar menu
-
 		//Cambiar clase activa del menu al hacer click y scroll
 		//Detectar cuando el scroll se encuentra en alguna seccion para generar una animacion
 
