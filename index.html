@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>MenuFixedScrollResponsive</title>
 
-<style>
+	<style>
 
 	*{
 		box-sizing: border-box;
@@ -34,6 +34,17 @@
 		overflow: hidden;
 	}
 
+	.btnToggleMenu{
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		cursor: pointer;
+	}
+
+	.menu{
+		display: none;
+	}
+
 	.menu__link, .logo__link{
 		display: inline-block;
 		width: 100%;
@@ -55,8 +66,13 @@
 			display: inline-block;
 		}
 
+		.btnToggleMenu{
+			display: none;
+		}
+
 		.menu{
 			float: right;
+			display: block;
 		}
 
 		.menu__link, .logo__link{
@@ -78,6 +94,8 @@
 		<div class="logo">
 			<a class="logo__link" href="#header" data-scroll="true">LOGO</a>
 		</div>
+
+		<button class="btnToggleMenu">Close</button>
 
 		<nav class="menu">
 			<a class="menu__link" href="#uno">Uno</a>
@@ -102,40 +120,50 @@
 
 		//Animar scroll
 		var menu = $('.menu'),
-				menuLink = menu.find('a[href^="#"]'),
-				triggerScroll = $('[data-scroll="true"]');
+		menuLink = menu.find('a[href^="#"]'),
+		triggerScroll = $('[data-scroll="true"]');
 
 		function animateScroll ($this) {
 
 			var target = $this.hash,
-	        menu = target;
+			menu = target;
 
-	    $target = $(target);
+			$target = $(target);
 
-	    $('html, body').stop().animate({
-	      'scrollTop': $target.offset().top
-	    }, 700);
+			$('html, body').stop().animate({
+				'scrollTop': $target.offset().top
+			}, 700);
 
 		}
 
 		menuLink.on('click', function(e) {
-	  	e.preventDefault();
+			e.preventDefault();
 
-	  	animateScroll(this);
+			animateScroll(this);
 
 		});
 
 		//Crear anclas independientes
 		triggerScroll.on('click', function(e) {
-	  	e.preventDefault();
+			e.preventDefault();
 
-	  	animateScroll(this);
+			animateScroll(this);
 
+		});
+
+		//Ocultar menu en movil y mostrarlo con boton hamburgesa
+		$('.btnToggleMenu').click(function(e) {
+			e.preventDefault();
+			menu.slideToggle();
 		});
 
 
 
-		//Ocultar menu en movil y mostrarlo con boton hamburgesa
+
+
+
+
+
 		//Crear animacion del boton hamburgesa al abrir y cerrar menu
 		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
 
