@@ -25,6 +25,7 @@
 
 	.header{
 		height: 450px;
+		padding-top: 58px; /*-- Espacio donde va el menu en movil, por lo tanto este valor siempre sera la altura del menu --*/
 	}
 
 	.navbar{
@@ -33,6 +34,10 @@
 		top: 0;
 		overflow: hidden;
 		border-bottom: 1px solid red;
+	}
+
+	.navbar--fixed{
+		position: fixed !important;
 	}
 
 	.btnToggleMenu{
@@ -61,10 +66,12 @@
 
 	@media (min-width: 768px) {
 
+		.header{
+			padding-top: 0;
+		}
+
 		.navbar{
 			position: static;
-			border-bottom: none;
-			max-width: 1440px;
 			margin: auto;
 		}
 
@@ -157,12 +164,16 @@
 
 			slideUpMenuMovil();
 			animateScroll(this);
+
+			return false;
 		});
 
 		//Ocultar menu en movil y mostrarlo con boton hamburgesa
 		$('.btnToggleMenu').click(function(e) {
 			e.preventDefault();
 			menu.slideToggle();
+
+			return false;
 		});
 
 		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
@@ -184,12 +195,28 @@
 
     }
 
-    //En movil cerrar menu al hacer click en algun enlace
+    //En movil cerrar menu al hacer click en algun enlace del menu
     function slideUpMenuMovil () {
 			if(doneResizing() <= 752 ){
         menu.slideUp();
       }
     }
+
+    //Fijar menu al hacer scroll en desktop
+    $($window).scroll(function() {
+
+			var windscroll = $('#uno').offset().top,
+	        win = $window.scrollTop(),
+	        nav = $('.navbar');
+	        navHeight = nav.outerHeight();
+
+	    if ( windscroll <= win + navHeight) {
+	      nav.addClass('navbar--fixed');
+	    } else {
+	      nav.removeClass('navbar--fixed');
+	    }
+
+    });
 
 
 
