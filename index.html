@@ -60,10 +60,6 @@
 		border-bottom: 1px solid red;
 	}
 
-	.menu__link--active{
-		border: 1px solid red;
-	}
-
 	.logo__link{
 		width: auto;
 		border-bottom: none;
@@ -96,6 +92,10 @@
 		.menu__link, .logo__link{
 			width: auto;
 			border-bottom: none;
+		}
+
+		.menu__link--active{
+			border: 1px solid red;
 		}
 
 	}
@@ -160,6 +160,7 @@
 			e.preventDefault();
 
 			slideUpMenuMovil();
+			navChangueClickColor(this);
 			animateScroll(this);
 
 			return false;
@@ -175,45 +176,56 @@
 
 		//Al redimensionar la ventana del navegador ocultar menu movil y mostrarlo en desktop
 		var resizeId;
-	    $window.resize(function() {
-	      clearTimeout(resizeId);
-	      resizeId = setTimeout(doneResizing, 300);
-	    });
+    $window.resize(function() {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(doneResizing, 300);
+    });
 
-	    function doneResizing(){
+    function doneResizing(){
 
-	        var anchoVentana = $window.outerWidth();
+      var anchoVentana = $window.outerWidth();
 
-	        if(anchoVentana >= 752 ){
-	          menu.css('display', '');
-	        }
+      if(anchoVentana >= 752 ){
+        menu.css('display', '');
+      }
 
-	        return anchoVentana;
+      return anchoVentana;
 
+    }
+
+    //En movil cerrar menu al hacer click en algun enlace del menu
+    function slideUpMenuMovil () {
+		if(doneResizing() <= 752 ){
+        	menu.slideUp();
+      	}
+    }
+
+    //Fijar menu al hacer scroll en desktop
+    $($window).on('load scroll', function() {
+
+		var windscroll = $('#uno').offset().top,
+	        win = $window.scrollTop(),
+	        nav = $('.navbar');
+	        navHeight = nav.outerHeight();
+
+	    if ( windscroll <= win + navHeight) {
+	      nav.addClass('navbar--fixed');
+	    } else {
+	      nav.removeClass('navbar--fixed');
 	    }
 
-	    //En movil cerrar menu al hacer click en algun enlace del menu
-	    function slideUpMenuMovil () {
-			if(doneResizing() <= 752 ){
-	        	menu.slideUp();
-	      	}
+    });
+
+    //Cambiar clase activa del menu al hacer click
+    function navChangueClickColor($this){
+
+	    menuLink.removeClass('menu__link--active');
+
+	    if( $($this).hasClass('menu__link')){
+	    	$($this).addClass('menu__link--active');
 	    }
 
-	    //Fijar menu al hacer scroll en desktop
-	    $($window).on('load scroll', function() {
-
-			var windscroll = $('#uno').offset().top,
-		        win = $window.scrollTop(),
-		        nav = $('.navbar');
-		        navHeight = nav.outerHeight();
-
-		    if ( windscroll <= win + navHeight) {
-		      nav.addClass('navbar--fixed');
-		    } else {
-		      nav.removeClass('navbar--fixed');
-		    }
-
-	    });
+		}
 
 
 
@@ -226,7 +238,6 @@
 
 
 		//Crear animacion del boton hamburgesa al abrir y cerrar menu
-		//Cambiar clase activa del menu al hacer click y scroll
 		//Detectar cuando el scroll se encuentra en alguna seccion para generar una animacion
 
 	</script>
