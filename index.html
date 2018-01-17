@@ -105,7 +105,7 @@
 				menuLink = menu.find('a[href^="#"]'),
 				triggerScroll = $('[data-scroll="true"]');
 
-		function animateAnchor ($this) {
+		function animateScroll ($this) {
 
 			var target = $this.hash,
 	        menu = target;
@@ -121,7 +121,7 @@
 		menuLink.on('click', function(e) {
 	  	e.preventDefault();
 
-	  	animateAnchor(this);
+	  	animateScroll(this);
 
 		});
 
@@ -129,7 +129,7 @@
 		triggerScroll.on('click', function(e) {
 	  	e.preventDefault();
 
-	  	animateAnchor(this);
+	  	animateScroll(this);
 
 		});
 
