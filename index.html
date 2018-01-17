@@ -116,7 +116,7 @@
 		<button class="btnToggleMenu">Open/Close</button>
 
 		<nav class="menu">
-			<a class="menu__link menu__link--active" href="#uno" data-scroll="true">Uno</a>
+			<a class="menu__link" href="#uno" data-scroll="true">Uno</a>
 			<a class="menu__link" href="#dos" data-scroll="true">Dos</a>
 			<a class="menu__link" href="#tres" data-scroll="true">Tres</a>
 			<a class="menu__link" href="#cuatro" data-scroll="true">Cuatro</a>
@@ -151,20 +151,11 @@
 
 			$('html, body').stop().animate({
 				'scrollTop': $target.offset().top
-			}, 700);
+			}, 700, 'swing', function() {
+          $(document).on('scroll', onScroll);
+      });
 
 		}
-
-		//Crear anclas independientes
-		triggerScroll.on('click', function(e) {
-			e.preventDefault();
-
-			slideUpMenuMovil();
-			navChangueClickColor(this);
-			animateScroll(this);
-
-			return false;
-		});
 
 		//Ocultar menu en movil y mostrarlo con boton hamburgesa
 		$('.btnToggleMenu').click(function(e) {
@@ -227,7 +218,42 @@
 
 		}
 
+		//Cambiar clase activa del menu al hacer scroll
+		function onScroll (){
+			var scrollPos = $(document).scrollTop();
 
+			menuLink.each(function () {
+
+          var currLink = $(this),
+              refElement = $(currLink.attr("href"));
+
+          if ((refElement.position().top - 60) <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+
+              navChangueClickColor(currLink);
+
+          }else{
+
+              currLink.removeClass("menu__link--active");
+
+          }
+
+      });
+
+		}
+
+		$(document).on('scroll', onScroll);
+
+		//Crear anclas independientes
+		triggerScroll.on('click', function(e) {
+			e.preventDefault();
+
+			$(document).off('scroll', onScroll);
+			slideUpMenuMovil();
+			navChangueClickColor(this);
+			animateScroll(this);
+
+			return false;
+		});
 
 
 
