@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MenuFixedScrollResponsive</title>
+
+<style>
+
+	*{
+		box-sizing: border-box;
+	}
+
+	body{
+		margin: 0;
+		font-family: sans-serif;
+	}
+
+	.seccion{
+		border: 1px solid red;
+		height: 800px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.header{
+		height: 450px;
+	}
+
+	.navbar{
+		width: 100%;
+		position: fixed;
+		top: 0;
+		overflow: hidden;
+	}
+
+	.menu__link, .logo__link{
+		display: inline-block;
+		width: 100%;
+		padding: 20px;
+		text-decoration: none;
+		border-bottom: 1px solid red;
+	}
+
+	@media (min-width: 768px) {
+
+		.navbar{
+			position: static;
+
+			max-width: 1440px;
+			margin: auto;
+		}
+
+		.logo{
+			display: inline-block;
+		}
+
+		.menu{
+			float: right;
+		}
+
+		.menu__link, .logo__link{
+			width: auto;
+			border-bottom: none;
+		}
+
+	}
+
+</style>
+
+</head>
+<body>
+
+	<header id="header" class="seccion header">Encabezado</header>
+
+	<section class="navbar">
+
+		<div class="logo">
+			<a class="logo__link" href="#header">LOGO</a>
+		</div>
+
+		<nav class="menu">
+			<a class="menu__link" href="#uno">Uno</a>
+			<a class="menu__link" href="#dos">Dos</a>
+			<a class="menu__link" href="#tres">Tres</a>
+			<a class="menu__link" href="#cuatro">Cuatro</a>
+		</nav>
+	</section>
+
+	<section id="uno" class="seccion">Sección Uno</section>
+
+	<section id="dos" class="seccion">Sección Dos</section>
+
+	<section id="tres" class="seccion">Sección Tres</section>
+
+	<section id="cuatro" class="seccion">Sección Cuatro</section>
+
+</body>
+</html>
